@@ -15,20 +15,20 @@ public class Clock : MonoBehaviour {
 		degreesPerSecond = 6f;
 
     public Transform hoursTransform, minutesTransform, secondsTransform;
-
+    public bool continuous;
     //define a method
     //awake is invoked once at start up
     //void Awake () {
-    void Update(){
+    void UpdateContinuous(){
         
     //Debug.Log(DateTime.Now + "hi");
-    DateTime time = DateTime.Now;
+    TimeSpan time = DateTime.Now.TimeOfDay;
         hoursTransform.localRotation =
-            Quaternion.Euler(0f, time.Hour * degreesPerHour, 0f); //f suffix added to both numbers to declare floating point data type
+            Quaternion.Euler(0f, (float)time.TotalHours * degreesPerHour, 0f); //f suffix added to both numbers to declare floating point data type
         minutesTransform.localRotation =
-        Quaternion.Euler(0f, time.Minute * degreesPerMinute, 0f);
+        Quaternion.Euler(0f, (float)time.TotalMinutes * degreesPerMinute, 0f);
         secondsTransform.localRotation =
-            Quaternion.Euler(0f, time.Second * degreesPerSecond, 0f);
+            Quaternion.Euler(0f, (float)time.TotalSeconds * degreesPerSecond, 0f);
         //localRotation refers to the actual rotation of a transform
         //component, independent of the rotation of it's parents.
 
@@ -38,5 +38,22 @@ public class Clock : MonoBehaviour {
     }
     //we just want to execute some code, without providing a resulting value. 
     //In other words, the result of the method is void.
+    void UpdateDiscrete()    {
+        DateTime time = DateTime.Now;
+        hoursTransform.localRotation =
+            Quaternion.Euler(0f, time.Hour * degreesPerHour, 0f);
+        minutesTransform.localRotation =
+            Quaternion.Euler(0f, time.Minute * degreesPerMinute, 0f);
+        secondsTransform.localRotation =
+            Quaternion.Euler(0f, time.Second * degreesPerSecond, 0f);
+    }
 
+    void Update() {
+        if(continuous) {
+            UpdateContinuous();
+        } else
+        {
+            UpdateDiscrete();
+        }
+    }
 }

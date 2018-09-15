@@ -541,6 +541,7 @@ MonoBehaviour:
   hoursTransform: {fileID: 1742056046}
   minutesTransform: {fileID: 484030769}
   secondsTransform: {fileID: 1611817862}
+  continuous: 1
 --- !u!1 &667669580
 GameObject:
   m_ObjectHideFlags: 0
@@ -798,6 +799,7 @@ MonoBehaviour:
   hoursTransform: {fileID: 0}
   minutesTransform: {fileID: 0}
   secondsTransform: {fileID: 0}
+  continuous: 0
 --- !u!1 &908876936
 GameObject:
   m_ObjectHideFlags: 0
